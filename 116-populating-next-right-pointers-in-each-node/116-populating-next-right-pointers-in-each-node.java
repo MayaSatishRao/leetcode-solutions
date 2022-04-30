@@ -22,8 +22,10 @@ class Node {
 */
 
 class Solution {
-    public Node connect(Node root) {
-        if(root==null)
+    
+   
+    public Node connect(Node a) {
+     /*   if(root==null)
             return null;
         
         Queue<Node > q = new LinkedList<Node>();
@@ -51,6 +53,24 @@ class Solution {
             
         }
         
-        return root;
+        return root;*/
+        Node root=a;
+        if(root==null)
+            return root;
+       
+        while(root!=null && root.left!=null){
+            Node n = root;
+            
+            while(true){
+                n.left.next=n.right;
+                if(n.next==null)
+                    break;
+                
+                n.right.next = n.next.left;
+                n=n.next;
+            }
+            root=root.left;
+        }
+        return a;
     }
 }
