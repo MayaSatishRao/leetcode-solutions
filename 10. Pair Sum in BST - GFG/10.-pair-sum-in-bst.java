@@ -56,7 +56,7 @@ class GFG
 {
     //Function to check if any pair exists in BST
     //whose sum is equal to given value.
-    static boolean search(Node root, int key){
+   /* static boolean search(Node root, int key){
         while(root!=null){
             if(root.data==key)
             return true;
@@ -79,10 +79,32 @@ class GFG
           
           //System.out.println(X-curr.data+" "+b);
           return b|| find(root,curr.left,X) || find(root,curr.right,X);
+    }*/
+    
+    static void inorder(Node root, ArrayList<Integer> arr){
+        if(root!=null){
+            inorder(root.left,arr);
+            arr.add(root.data);
+            inorder(root.right,arr);
+        }
     }
     static boolean findPair(Node root, int X) 
     {
         // Your code
-        return find(root,root,X);
+        ArrayList<Integer> arr = new ArrayList<Integer>();
+        inorder(root,arr);
+        
+        int i=0,j=arr.size()-1;
+        while(i<j){
+            int sum = arr.get(i)+arr.get(j);
+            if(sum==X)
+            return true;
+            if(sum<X)
+            i++;
+            else
+            j--;
+        }
+        
+        return false;
     }
 }
