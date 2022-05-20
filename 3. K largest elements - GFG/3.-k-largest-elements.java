@@ -42,7 +42,7 @@ class Solution
     public static ArrayList<Integer> kLargest(int arr[], int n, int k)
     {
         // code here 
-        ArrayList<Integer> res = new ArrayList<Integer>();
+       /* ArrayList<Integer> res = new ArrayList<Integer>();
         Arrays.sort(arr);
         int count=0,i=n-1;
         while(count!=k){
@@ -50,6 +50,25 @@ class Solution
             i--;
             count++;
         }
+        return res;*/
+        
+        PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+        for(int i=0;i<n;i++){
+            if(pq.size()<k)
+            pq.add(arr[i]);
+            else{
+                if(arr[i]>pq.peek()){
+                    pq.poll();
+                    pq.add(arr[i]);
+                }
+            }
+        }
+        
+        ArrayList<Integer> res= new ArrayList<>();
+        while(!pq.isEmpty())
+        res.add(pq.poll());
+        
+        Collections.sort(res,Collections.reverseOrder());
         return res;
     }
 }
