@@ -1,10 +1,9 @@
 class Solution {
     public double[] medianSlidingWindow(int[] nums, int k) {
         ArrayList<Double> res = new ArrayList<Double>();
-        
+        double[] arr = new double[nums.length-k+1];
         if(k==1){
-            double[] arr = new double[nums.length];
-        for(int i=0;i<nums.length;i++)
+          for(int i=0;i<nums.length;i++)
             arr[i]=(double)nums[i];
         
              return arr;
@@ -32,15 +31,17 @@ class Solution {
         }
         
         int j=0;
-        if(small.size()!=large.size())
-            res.add((double)small.peek());
-        else
-            res.add(((double)small.peek()+(double)large.peek())/2);
-        for(int i=k;i<nums.length;i++){
-            if(nums[j]<large.peek())
-                small.remove(nums[j]);
+         if(small.size()!=large.size())
+            arr[j]=(double)small.peek();
             else
-                large.remove(nums[j]);
+            arr[j]=((double)small.peek()+(double)large.peek())/2;
+        j++;
+        
+        for(int i=k;i<nums.length;i++){
+            if(nums[j-1]<large.peek())
+                small.remove(nums[j-1]);
+            else
+                large.remove(nums[j-1]);
             
             if(small.size()==0)
                 small.add(nums[i]);
@@ -61,17 +62,15 @@ class Solution {
             
             
             if(small.size()!=large.size())
-            res.add((double)small.peek());
+            arr[j]=(double)small.peek();
             else
-            res.add(((double)small.peek()+(double)large.peek())/2);
+            arr[j]=((double)small.peek()+(double)large.peek())/2;
             
             //System.out.println(small+" "+large);
             j++;
         }
         
-        double[] arr = new double[res.size()];
-        for(int i=0;i<res.size();i++)
-            arr[i]=res.get(i);
+        
         
         return arr;
 
