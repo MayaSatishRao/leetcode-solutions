@@ -14,9 +14,25 @@ class Solution {
         int count=0;
         for(int i=0;i<s.length();i++){
             count++;
-            for(int j=i+1;j<s.length();j++){
-                if(palindrome(s.substring(i,j+1)))
+            int left=i-1,right=i+1;
+            while(left>=0 && right<=s.length()-1){
+                if(s.charAt(left)==s.charAt(right)){
+                    left--;
+                    right++;
                     count++;
+                }else
+                    break;
+            }
+            left=i;
+            right=i+1;
+            
+            while(left>=0 && right<s.length()){
+                if(s.charAt(left)==s.charAt(right)){
+                    count++;
+                    left--;
+                    right++;
+                }else
+                    break;
             }
         }
         
