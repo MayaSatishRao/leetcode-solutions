@@ -1,23 +1,18 @@
 class Solution {
     public List<Integer> intersection(int[][] nums) {
-        TreeMap<Integer,Integer> tm = new TreeMap<Integer,Integer>();
+       // TreeMap<Integer,Integer> tm = new TreeMap<Integer,Integer>();
+        int[] freq = new int[1001];
         for(int i=0;i<nums.length;i++){
             for(int j=0;j<nums[i].length;j++){
-                if(tm.get(nums[i][j])==null)
-                    tm.put(nums[i][j],1);
-                else
-                    tm.put(nums[i][j],1+tm.get(nums[i][j]));
+                freq[nums[i][j]]++;
+                  
             }
         }
         
         List<Integer> res = new ArrayList<Integer>();
-        for(Map.Entry el: tm.entrySet()){
-            int freq = (int)el.getValue();
-            int a = (int)el.getKey();
-            
-            if(freq==nums.length)
-                res.add(a);
-        }
+        for(int i=1;i<1001;i++)
+            if(freq[i]==nums.length)
+                res.add(i);
         
         return res;
     }
