@@ -1,6 +1,6 @@
 class Solution {
     
-    public void swap(int[] arr, int i, int j){
+   /* public void swap(int[] arr, int i, int j){
         int temp=arr[i];
         arr[i]=arr[j];
         arr[j]=temp;
@@ -22,9 +22,9 @@ class Solution {
         
         
         
-    }
+    }*/
     public int findKthLargest(int[] arr, int k) {
-        int pos = arr.length-k;
+       /* int pos = arr.length-k;
         int low = 0, high=arr.length-1;
         
         while(true){
@@ -36,6 +36,19 @@ class Solution {
             else
                 low=p+1;
             //System.out.println(p);
+        }*/
+        
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for(int i=0;i<k;i++)
+            pq.add(arr[i]);
+        
+        for(int i=k;i<arr.length;i++){
+            if(arr[i]>pq.peek()){
+                pq.poll();
+                pq.add(arr[i]);
+            }
         }
+        
+        return pq.peek();
     }
 }
