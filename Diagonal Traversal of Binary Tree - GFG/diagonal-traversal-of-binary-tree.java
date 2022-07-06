@@ -131,22 +131,16 @@ class Tree
            q.add(root);
            
            while(!q.isEmpty()){
-               Queue<Node> temp = new LinkedList<Node>();
+               
                Node p =q.poll();
-               temp.add(p);
-               res.add(p.data);
-               p=p.right;
+               
                while(p!=null){
                    res.add(p.data);
-                   temp.add(p);
+                   if(p.left!=null)
+                   q.add(p.left);
                    p=p.right;
                }
                
-               while(!temp.isEmpty()){
-                   Node a = temp.poll();
-                   if(a.left!=null)
-                   q.add(a.left);
-               }
                
            }
            
