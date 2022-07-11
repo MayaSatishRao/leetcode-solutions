@@ -48,7 +48,7 @@ class Solution {
     }
     public boolean isCyclic(int V, ArrayList<ArrayList<Integer>> adj) {
         // code here
-        boolean[] visit = new boolean[V];
+     /*   boolean[] visit = new boolean[V];
         boolean[] rs = new boolean[V];
         
         for(int i=0;i<V;i++){
@@ -56,6 +56,39 @@ class Solution {
              return true;
         }
         
-        return false;
+        return false;*/
+        
+        Queue<Integer> q = new LinkedList<>();
+        
+
+        int[] indegree = new int[V];
+        for(int i=0;i< adj.size();i++){
+            for(int j=0;j<adj.get(i).size();j++){
+                int next = adj.get(i).get(j);
+                indegree[next]++;
+            }
+        }
+        
+        for(int i=0;i<V;i++)
+            if(indegree[i]==0)
+                q.add(i);
+        
+        //System.out.println(q);
+        int count=0;
+        while(!q.isEmpty()){
+            int a = q.poll();
+            for(int i=0;i<adj.get(a).size();i++){
+                int next = adj.get(a).get(i);
+                indegree[next]--;
+                if(indegree[next]==0){
+                    q.add(next);
+                    
+                }
+                    
+            }
+            count++;
+            
+        }
+            return !(count==V);
     }
 }
