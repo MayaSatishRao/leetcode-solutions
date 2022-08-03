@@ -9,7 +9,7 @@ class MyCalendar {
     }
     
     public boolean book(int start, int end) {
-        boolean cannot = false;
+      /*  boolean cannot = false;
         for(Map.Entry<Integer,Integer> et: tm.entrySet()){
              int prevStart = et.getKey();
              int prevEnd = et.getValue();
@@ -20,6 +20,13 @@ class MyCalendar {
              }
         }
         if(cannot)
+            return false;
+        tm.put(start,end);
+        return true;*/
+        
+        if(tm.floorEntry(start)!=null && start<tm.floorEntry(start).getValue())
+            return false;
+        if(tm.ceilingEntry(start)!=null && end>tm.ceilingEntry(start).getKey())
             return false;
         tm.put(start,end);
         return true;
