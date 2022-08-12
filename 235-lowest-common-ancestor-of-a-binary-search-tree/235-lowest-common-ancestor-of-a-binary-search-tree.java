@@ -22,7 +22,7 @@ class Solution {
         return false;
     }
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        ArrayList<TreeNode> p1 = new ArrayList<TreeNode>();
+      /*  ArrayList<TreeNode> p1 = new ArrayList<TreeNode>();
         ArrayList<TreeNode> p2 = new ArrayList<TreeNode>();
         
         boolean b1 = path(root,p1,p);
@@ -35,6 +35,24 @@ class Solution {
             if(p1.get(i) != p2.get(i))
                 return p1.get(i-1);
         
-        return p1.get(i-1);
+        return p1.get(i-1);*/
+        
+        if(root==null)
+            return null;
+        if(root==p || root==q)
+            return root;
+        
+        TreeNode l = lowestCommonAncestor(root.left,p,q);
+        TreeNode r = lowestCommonAncestor(root.right,p,q);
+        
+        if(l!=null && r!=null)
+            return root;
+        
+        if(l==null && r!=null)
+            return lowestCommonAncestor(r,p,q);
+        if(l!=null && r==null)
+            return lowestCommonAncestor(l,p,q);
+        
+        return null;
     }
 }
