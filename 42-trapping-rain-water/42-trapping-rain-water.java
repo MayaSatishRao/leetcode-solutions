@@ -4,21 +4,22 @@ class Solution {
         int[] left = new int[n];
         int[] right = new int[n];
         
-        Stack<Integer> s = new Stack<>();
+        
+        int currMax=0;
         for(int i=0;i<n;i++){
-            if(s.isEmpty() || s.peek()<=height[i]){
+            if(currMax<=height[i]){
                 left[i]=0;
-                s.push(height[i]);
+                currMax=height[i];
             }else
-                left[i]=s.peek();
+                left[i]=currMax;
         }
         
-        s.clear();
+        currMax=0;
         for(int i=n-1;i>=0;i--){
-            if(s.isEmpty() || s.peek()<=height[i])
-                s.push(height[i]);
+            if(currMax<=height[i])
+                currMax=height[i];
             else
-                right[i]=s.peek();
+                right[i]=currMax;
         }
         
         int res=0;
