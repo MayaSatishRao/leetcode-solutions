@@ -7,7 +7,7 @@ class Solution {
         return res;
     }
     public String reverseWords(String s) {
-        String[] arr = s.split(" ");
+      /*  String[] arr = s.split(" ");
         for(int i=0;i<arr.length;i++)
         arr[i] = reverse(arr[i]);
         
@@ -16,9 +16,27 @@ class Solution {
             res+=arr[i];
             if(i!=arr.length-1)
                 res+=" ";
+        }*/
+        
+        char[] arr = s.toCharArray();
+        for(int i=0;i<s.length();){
+            int j=i+1;
+            while(j<s.length() && s.charAt(j)!=' ')
+                j++;
+            int start = i,end=j-1;
+            while(start<end){
+                char ch = arr[start];
+                arr[start]=arr[end];
+                arr[end]=ch;
+                start++;
+                end--;
+            }
+            
+            
+            i=j+1;
         }
             
         
-        return res;
+        return new String(arr);
     }
 }
