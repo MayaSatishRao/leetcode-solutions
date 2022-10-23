@@ -1,7 +1,7 @@
 class Solution {
     public int[] findErrorNums(int[] nums) {
-        int n = nums.length,repeat=0,not=0;
-        boolean[] present = new boolean[n];
+        int n = nums.length;
+       /* boolean[] present = new boolean[n];
         for(int i=0;i<n;i++){
             if(!present[nums[i]-1])
                 present[nums[i]-1]=true;
@@ -13,9 +13,22 @@ class Solution {
             if(!present[i-1])
                 not=i;
         
-        int[] res= new int[2];
+        
         res[0]=repeat;
         res[1]=not;
+        */
+        int[] res= new int[2];
+        
+        for(int i=0;i<n;i++){
+            if(nums[Math.abs(nums[i])-1]<0){
+                res[0]=Math.abs(nums[i]);
+            }else
+            nums[Math.abs(nums[i])-1]*=-1;
+        }
+        
+        for(int i=0;i<n;i++)
+            if(nums[i]>0)
+                 res[1]=i+1;
         
         return res;
     }
