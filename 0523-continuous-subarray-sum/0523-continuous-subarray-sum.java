@@ -9,13 +9,13 @@ class Solution {
               int rem = sum%k;
               if(hm.get(rem)==null)
                   hm.put(rem,i);
-              else
-                  res=Math.max(res,i-hm.get(rem));
+              else if(i-hm.get(rem)>=2)
+                  return true;
           }
         
         // System.out.println(res);
         
-         return res>=2;
+         return false;
         
     }
 }
