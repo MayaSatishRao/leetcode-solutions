@@ -17,7 +17,7 @@ class Solution {
     }
     
     public String makeGood(String s) {
-       if(s.length()==0)
+     /*  if(s.length()==0)
            return s;
         ArrayDeque<Character> stk = new ArrayDeque<Character>();
         
@@ -43,7 +43,20 @@ class Solution {
             return res;
         else{
           return reverse(res);  
+        }*/
+        
+        StringBuilder str = new StringBuilder(s);
+        int end=0;
+        for(int i=0;i<str.length();i++){
+            if(end>0 && Math.abs(str.charAt(end-1)-str.charAt(i))==32)
+                 end--;
+            else{
+                str.setCharAt(end,s.charAt(i));
+                end++;
+            }
         }
+        
+        return str.toString().substring(0,end);
         
     }
 }
