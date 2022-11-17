@@ -40,15 +40,13 @@ class Solution {
         // code here
     
         long res=0;
-        boolean found=false;
         int prev=0;
         
         for(int i=0;i<n;i++){
             if(arr[i]>k){
-                found=true;
                 res+=(i+1);
                 prev=(i+1);
-            }else if(arr[i]<=k && found){
+            }else if(arr[i]<=k){
                 res+=prev;
             }
               
