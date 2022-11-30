@@ -85,26 +85,63 @@ class Node {
 }*/
 
 class Solution {
-    Node reorderlist(Node head) {
-        // Your code here
-        ArrayList<Integer> arr = new ArrayList<>();
+    
+    Node reverse(Node head){
+        Node prev=null,curr=head,next=head;
+        while(curr!=null){
+            next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+        return prev;
+    }
+    
+    void display(Node head){
         Node p = head;
         while(p!=null){
-            arr.add(p.data);
+            System.out.print(p.data+" ");
             p=p.next;
         }
-        int i=0,j=arr.size()-1;
-        p=head;
-        while(i<=j && p!=null){
-            p.data=arr.get(i);
-            p=p.next;
-            i++;
-            if(p==null)
-            break;
-            p.data=arr.get(j);
-            j--;
-            p=p.next;
+        System.out.println();
+        
+    }
+    Node reorderlist(Node head) {
+        // Your code here
+        Node slow=head,fast=head;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
         }
-        return head;
+        
+        
+        Node n = reverse(slow.next);
+        slow.next=null;
+        Node p=head,q=n,h=null,tail=null;
+        while(q!=null){
+            if(h==null){
+                h=p;
+                tail=p;
+            }else{
+                tail.next=p;
+                tail=tail.next;
+            }
+            p=p.next;
+            
+            tail.next=q;
+            tail=tail.next;
+            q=q.next;
+        }
+        
+        if(p!=null){
+            if(h==null){
+                h=p;
+                tail=p;
+            }else{
+                tail.next=p;
+            }
+        }
+        
+        return h;
     }
 }
