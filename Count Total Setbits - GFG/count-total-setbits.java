@@ -26,16 +26,16 @@ class GFG {
 
 class Solution {
     
-    public static int[] lookUpTable(){
+   /* public static int[] lookUpTable(){
         int[] table = new int[256];
         
         for(int i=1;i<256;i++)
           table[i] = (i&1)+table[i/2];
         
         return table;
-    }
+    }*/
     public static long countBits(long N) {
-        // code here
+       /* // code here
         // 0-0, 1-1, 2-1, 3-2, 4-1, 5-2, 6-2, 7-3
         int[] table = lookUpTable();
         long res=0;
@@ -54,7 +54,19 @@ class Solution {
             res+=table[(int)(j&255)];
         }
         
-        return res;
+        return res;*/
+        if(N==0)
+          return 0;
+        if(N==1)
+          return 1;
+          
+        long res=0;
+        long pow = (long)(Math.log(N)/Math.log(2));
+        
+        res+=(long)Math.pow(2,pow-1)*pow;
+        res+=(long)(N-(long)Math.pow(2,pow)+1);
+        
+        return res+countBits(N-(long)Math.pow(2,pow));
     }
 }
         
