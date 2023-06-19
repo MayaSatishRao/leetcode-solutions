@@ -54,10 +54,26 @@ class Solution{
         int[] dp = new int[n];
         dp[n-1] = 1;
         
+        
+        boolean[][] isPal = new boolean[n][n];
+        for(int i=0;i<n;i++)
+          isPal[i][i] = true;
+       
+        
+        for(int len=2;len<=n;len++){
+            for(int i=0;i+len<=n;i++){
+                int j = i+len-1;
+                if(len==2)
+                  isPal[i][j] = str.charAt(i)==str.charAt(j);
+                else
+                  isPal[i][j] = str.charAt(i)==str.charAt(j) && isPal[i+1][j-1];
+            }
+        }
+        
         for(int i=n-2;i>=0;i--){
             dp[i] = 1+dp[i+1];
             for(int j=i;j<n;j++){
-                if(isPalindrome(str,i,j)){
+                if(isPal[i][j]){
                     int add = j==n-1?0:dp[j+1];
                     dp[i] = Math.min(add+1,dp[i]);
                 }
