@@ -38,33 +38,25 @@ class Solution{
 
     static Boolean isSubsetSum(int N, int arr[], int sum){
         // code here
-        int totalSum = 0, n=arr.length;
-        for(int i=0;i<n;i++)
-         totalSum+=arr[i];
-         
-         if(sum>totalSum)
-           return false;
-        
-        boolean[][] dp = new boolean[n+1][totalSum+1];
-        for(int i=1;i<totalSum+1;i++)
-         dp[0][i]=false;
-         
-         for(int i=0;i<n+1;i++)
-          dp[i][0]=true;
+        boolean[][] dp = new boolean[N][sum+1];
+        for(int i=0;i<N;i++)
+          dp[i][0] = true;
           
-        for(int i=1;i<n+1;i++){
-            for(int j=1;j<totalSum+1;j++){
-                boolean notTake = dp[i-1][j];
-                boolean take = false;
-                
-                if(arr[i-1]<=j)
-                 take=dp[i-1][j-arr[i-1]];
-                 
-                 dp[i][j] = take| notTake;
+        for(int i=0;i<=sum;i++){
+            if(i==arr[0])
+              dp[0][i]=true;
+            else
+              dp[0][i] = false;
+        }
+        
+        for(int i=1;i<N;i++){
+            for(int j=1;j<=sum;j++){
+                if(arr[i]<=j)
+                 dp[i][j]|=dp[i-1][j-arr[i]];
+                dp[i][j]|=dp[i-1][j];
             }
         }
         
-        
-        return dp[n][sum];
+        return dp[N-1][sum];
     }
 }
