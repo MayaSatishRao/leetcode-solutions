@@ -39,40 +39,34 @@ class GFG{
 
 class Solution 
 {
-    //Function to find length of longest increasing subsequence.
     static int binarySearch(ArrayList<Integer> arr, int key){
-        int low=0,high=arr.size()-1;
-        int res=0;
-        
-        while(low<=high){
+        int low=0, high=arr.size()-1;
+        while(low<high){
             int mid = low+(high-low)/2;
-            if(arr.get(mid)<=key){
-                low=mid+1;
-            }else{
-                res=mid;
-                high=mid-1;
-            }
-              
+            if(arr.get(mid)==key)
+              return mid;
+            if(arr.get(mid)<key)
+              low=mid+1;
+            else
+             high=mid;
         }
-        
-        return res;
+        return low;
     }
-    
-    static int longestSubsequence(int n, int a[])
+    //Function to find length of longest increasing subsequence.
+    static int longestSubsequence(int size, int a[])
     {
         // code here
-       ArrayList<Integer> arr = new ArrayList<>();
-       arr.add(a[0]);
-       
-       for(int i=1;i<n;i++){
-           if(arr.get(arr.size()-1)<a[i])
-             arr.add(a[i]);
-           else{
-               int index = binarySearch(arr,a[i]);
-               arr.set(index,a[i]);
-           }
-       }
-       
-       return arr.size();
+        ArrayList<Integer> arr = new ArrayList<>();
+        arr.add(a[0]);
+        for(int i=1;i<size;i++){
+            if(a[i]>arr.get(arr.size()-1))
+              arr.add(a[i]);
+            else{
+                int pos = binarySearch(arr,a[i]);
+                arr.set(pos,a[i]);
+            }
+        }
+        
+        return arr.size();
     }
 } 
